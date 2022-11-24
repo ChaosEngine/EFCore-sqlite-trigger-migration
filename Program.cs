@@ -34,14 +34,25 @@ petGroup.MapGet("/{id}", async (int id, PetContext ctx) =>
 
 	return pet != null ? Results.Ok(pet) : Results.NotFound();
 });
-petGroup.MapPost("/", async (string name, string type, PetContext ctx) =>
+petGroup.MapPut("/", async (string name, string type, PetContext ctx) =>
 {
-	var p = new Pet(0, name, type);
+	var p = new Pet(0, name, type, DateTime.UtcNow);
 
 	await ctx.Pets.AddAsync(p);
 	await ctx.SaveChangesAsync();
 
 	return Results.Ok(p);
+});
+petGroup.MapPost("/", async (int id, string name, string type, PetContext ctx) =>
+{
+	int updated_count = await ctx.Pets.Where(p => p.ID == id)
+		.ExecuteUpdateAsync(found =>
+			found.SetProperty(r => r.Name, name)
+			.SetProperty(r => r.Type, type)
+		//.SetProperty(r => r.UpdatedAt, DateTime.UtcNow)//intentionally commented out, I WANT trigger to execute on row
+		);
+
+	return updated_count > 0 ? Results.Ok() : Results.NotFound();
 });
 petGroup.MapDelete("/{id}", async (int id, PetContext ctx) =>
 {
@@ -64,7 +75,7 @@ app.Run();
 //
 // Model
 //
-internal record Pet(int ID, string Name, string Type);
+internal record Pet(int ID, string Name, string Type, DateTime? UpdatedAt);
 
 //
 // Db Context
@@ -87,12 +98,21 @@ internal class PetContext : DbContext
 			e.HasKey(p => p.ID);
 
 			e.Property(p => p.Name);
+
 			e.Property(p => p.Type);
+
+			e.Property(p => p.UpdatedAt)
+				.HasColumnType("TIMESTAMP")
+				.HasDefaultValueSql("CURRENT_TIMESTAMP")
+				.ValueGeneratedOnAddOrUpdate(); //You wish!.... Sqlite doews not have this. meaning it does not work
+												//here. only triggers can help! Or is it? AFAIK only MySql has column
+												//with timestamp generation on inser/update operations. Others MUST use triggers
+												//I am not talking about row-version like :-)
 
 			e.HasData(new Pet[]
 			{
-				new Pet(1, "Fluffy", "cat 🐱"),
-				new Pet(2, "Wolfie", "dog 🐕")
+				new Pet(ID: 1, Name: "Fluffy", "cat 🐱", UpdatedAt: DateTime.UtcNow),
+				new Pet(ID: 2, Name: "Wolfie", "dog 🐕", UpdatedAt: DateTime.UtcNow)
 			});
 
 		});
