@@ -1,0 +1,1 @@
+# EFCore-sqlite-trigger-migration
