@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore-sqlite-trigger-migration", "EFCore-sqlite-trigger-migration.csproj", "{987FA25E-256F-4074-A200-8A7CB9311BBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{987FA25E-256F-4074-A200-8A7CB9311BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{987FA25E-256F-4074-A200-8A7CB9311BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{987FA25E-256F-4074-A200-8A7CB9311BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{987FA25E-256F-4074-A200-8A7CB9311BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E581753A-2D71-491B-B244-B881E11C6747}
+	EndGlobalSection
+EndGlobal
