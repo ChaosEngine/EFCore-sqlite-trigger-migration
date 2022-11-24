@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -91,8 +91,8 @@ internal class PetContext : DbContext
 
 			e.HasData(new Pet[]
 			{
-				new Pet(1, "Fluffy", "cat"),
-				new Pet(2, "Wolfie", "dog")
+				new Pet(1, "Fluffy", "cat 🐱"),
+				new Pet(2, "Wolfie", "dog 🐕")
 			});
 
 		});
