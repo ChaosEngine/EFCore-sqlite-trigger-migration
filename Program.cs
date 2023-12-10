@@ -104,7 +104,7 @@ internal class PetContext : DbContext
 			e.Property(p => p.UpdatedAt)
 				.HasColumnType("TIMESTAMP")
 				.HasDefaultValueSql("CURRENT_TIMESTAMP")
-				.ValueGeneratedOnAddOrUpdate(); //You wish!.... Sqlite doews not have this. meaning it does not work
+				.ValueGeneratedOnAddOrUpdate(); //You wish!.... Sqlite does not have this. meaning it does not work
 												//here. only triggers can help! Or is it? AFAIK only MySql has column
 												//with timestamp generation on inser/update operations. Others MUST use triggers
 												//I am not talking about row-version like :-)
