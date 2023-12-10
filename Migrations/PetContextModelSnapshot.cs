@@ -31,7 +31,7 @@ namespace EFCoresqlitetriggermigration.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
+                        //.ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TIMESTAMP")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
